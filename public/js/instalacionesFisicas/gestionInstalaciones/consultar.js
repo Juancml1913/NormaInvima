@@ -11,7 +11,7 @@ $(document).ready(()=>{
             { "data": "actualizado" },
             {"data":null,render:(data)=>{
                 return '<div>'+
-                            '<a class="btn" href="/usuarios/modificar/'+data.id+'" data-toggle="tooltip" data-placement="top" title="Modificar">'+
+                            '<a class="btn" href="/gestion-instalaciones-fisicas/modificar/'+data.id+'" data-toggle="tooltip" data-placement="top" title="Modificar">'+
                                 '<i class="fas fa-edit"></i></a>'+
                             '<button id="cambiarEstado" onclick="setId('+data.id+')" data-toggle="modal" data-target="#ConfirmModal" class="btn" data-toggle="tooltip" data-placement="top" title="Cambiar estado">'+
                             (data.estado==0?'<i class="fas fa-check"></i>':'<i class="fas fa-times-circle"></i>')+'</button>'+

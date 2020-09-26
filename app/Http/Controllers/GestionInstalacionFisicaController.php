@@ -90,7 +90,8 @@ class GestionInstalacionFisicaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $instalacion=InstalacionFisica::findOrFail($id);
+        return view('instalacionesFisicas.gestionInstalaciones.modificar', compact('instalacion'));
     }
 
     /**
@@ -100,9 +101,29 @@ class GestionInstalacionFisicaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $validatedData = Validator::make($request->all(), [
+                'descripcion' => 'required|max:255',
+            ]);
+
+            if ($validatedData->fails()) {
+                return response()->json([
+                    'errors' => $validatedData->errors(),
+                    'validate' => false
+                ]);
+            }
+            $data = $validatedData->getData();
+            $Instalacion = InstalacionFisica::findOrFail($data['instalacion_id']);
+            $Instalacion->descripcion = $data['descripcion'];
+            $Instalacion->save();
+
+            return response()->json([
+                'validate' => true,
+                'message' => 'Instalación física modificada correctamente.'
+            ]);
+        }
     }
 
     /**

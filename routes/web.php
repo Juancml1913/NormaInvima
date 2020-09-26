@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/gestion-instalaciones-fisicas/registrar','GestionInstalacionFisicaController@store');
     Route::get('/gestion-instalaciones-fisicas/consultar','GestionInstalacionFisicaController@show');
     Route::get('/gestion-instalaciones-fisicas/consultar-instalaciones','GestionInstalacionFisicaController@consultar');
+    Route::get('/gestion-instalaciones-fisicas/modificar/{id}','GestionInstalacionFisicaController@edit');
+    Route::put('/gestion-instalaciones-fisicas/modificar-instalacion','GestionInstalacionFisicaController@update');
     Route::delete('/gestion-instalaciones-fisicas/cambiarestado/{id}','GestionInstalacionFisicaController@destroy');
 });
 
