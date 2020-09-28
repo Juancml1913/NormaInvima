@@ -10,7 +10,7 @@
     <div class="row">
 
         <div class="container">
-            <form id="formCreate" class="row form_inputs" method="post" novalidate="novalidate">
+            <form id="formCreate" class="row form_inputs" novalidate="novalidate" autocomplete="off">
                 @csrf
                 <div class="form-group col-md-3 hideOrShow">
                     <label for="documento">Documento:</label>
@@ -32,7 +32,7 @@
                 </div>-->
                 <div class="form-group col-md-3">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" autocomplete="false">
                     <div class="text-danger" name="email"><small><ul></ul></small></div>
                 </div>
                 <div class="form-group col-md-3">
@@ -46,13 +46,13 @@
                 </div>   
                 <div class="form-group col-md-3">
                     <label for="password">Contraseña:</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" autocomplete="new-password">
                     <div class="text-danger" name="password"><small><ul></ul></small></div>
                 </div>  
 
                 <div class=" form-group col-md-3">
                     <label for="password-confirm">Confirmar contraseña:</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="password_confirmation" placeholder="Confirmar contraseña">
+                    <input type="password" class="form-control" id="confirmPassword" name="password_confirmation" placeholder="Confirmar contraseña" autocomplete="off">
                     <div class="text-danger" name="password_confirmation"><small><ul></ul></small></div>
                 </div>   
                 <div class=" form-group col-md-6">

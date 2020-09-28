@@ -11,7 +11,7 @@
     <div class="row">
 
         <div class="container">
-            <form id="formUpdate" class="row form_inputs">
+            <form id="formUpdate" class="row form_inputs" autocomplete="off">
                 @csrf
                 <input id="user_id" name="user_id" type="hidden" value="{{$user['id']}}">
                 <div class="form-group col-md-3 hideOrShow">
@@ -34,7 +34,7 @@
                 </div>-->
                 <div class="form-group col-md-3">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" value="{{$user['email']}}" name="email" placeholder="Email">
+                    <input type="email" class="form-control" id="email" value="{{$user['email']}}" name="email" placeholder="Email" autocomplete="off">
                     <div class="text-danger" name="email"><small><ul></ul></small></div>
                 </div>
                 <div class="form-group col-md-3">
@@ -48,13 +48,13 @@
                 </div>   
                 <div class="form-group col-md-3">
                     <label for="password">Contraseña:</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" autocomplete="new-password">
                     <div class="text-danger" name="password"><small><ul></ul></small></div>
                 </div>  
 
                 <div class=" form-group col-md-3">
                     <label for="password-confirm">Confirmar contraseña:</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="password_confirmation" placeholder="Confirmar contraseña">
+                    <input type="password" class="form-control" id="confirmPassword" name="password_confirmation" placeholder="Confirmar contraseña" autocomplete="off">
                     <div class="text-danger" name="password_confirmation"><small><ul></ul></small></div>
                 </div>   
                 <div class=" form-group col-md-6">
