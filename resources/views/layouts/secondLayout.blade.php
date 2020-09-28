@@ -47,6 +47,7 @@
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="">Mantenimiento</a>
                             <a class="nav-link" href="/gestion-instalaciones-fisicas">Gestión de instalaciones</a>
+                            <a class="nav-link" href="/gestion-documentos-instalaciones">Documentos de instalaciones</a>
                             <a class="nav-link" href="">Gestión de indicadores</a>
                         </nav>
                     </div>
