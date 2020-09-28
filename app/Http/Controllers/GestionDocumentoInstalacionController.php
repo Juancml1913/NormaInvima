@@ -54,7 +54,7 @@ class GestionDocumentoInstalacionController extends Controller
             }
             $data = $validatedData->getData();
             $documento = new DocumentoInstalacion();
-            $nombreDocumento = $request->file('documento')->store('instalaciones'); // Upload
+            $nombreDocumento = $request->file('documento')->store('public/instalaciones'); // Upload
             $documento->documento = $nombreDocumento;
             $documento->descripcion = $data['descripcion'];
             $documento->id_instalacion=$data['instalacion'];
@@ -88,6 +88,12 @@ class GestionDocumentoInstalacionController extends Controller
         ->get();
         $info['data']= $documentos;
         return $info;
+    }
+
+    public function ver($id){
+        $documento=DocumentoInstalacion::findOrFail($id);
+        $documento->documento=str_replace('public/','',$documento->documento);
+        return view('instalacionesFisicas.gestionDocumentos.ver', compact('documento'));
     }
 
     /**

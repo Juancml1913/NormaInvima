@@ -9,7 +9,7 @@ $(document).ready(()=>{
             { "data": "actualizado" },
             {"data":null,render:(data)=>{
                 return '<div>'+
-                '<a class="btn" href="sdfsdf" data-toggle="tooltip" data-placement="top" title="Ver">'+
+                '<a class="btn" href="/gestion-documentos-instalaciones/ver/'+data.id+'" data-toggle="tooltip" data-placement="top" title="Ver">'+
                                 '<i class="fa fa-file" aria-hidden="true"></i></a>'+
                             '<a class="btn" href="/gestion-instalaciones-fisicas/modificar/'+data.id+'" data-toggle="tooltip" data-placement="top" title="Modificar">'+
                                 '<i class="fas fa-edit"></i></a>'+
