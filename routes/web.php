@@ -44,5 +44,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/gestion-instalaciones-fisicas/modificar/{id}','GestionInstalacionFisicaController@edit');
     Route::put('/gestion-instalaciones-fisicas/modificar-instalacion','GestionInstalacionFisicaController@update');
     Route::delete('/gestion-instalaciones-fisicas/cambiarestado/{id}','GestionInstalacionFisicaController@destroy');
+
+
+
+
+
+
+
+
+
+
+
+    //Mantenimientos
+    Route::get('mantenimiento','MantenimientoController@index');
+    Route::get('/mantenimiento/registrar','MantenimientoController@create');
+    Route::post('/mantenimiento/registrar','MantenimientoController@store');
 });
 
