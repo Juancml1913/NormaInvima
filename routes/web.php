@@ -52,8 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/gestion-documentos-instalaciones/consultar','GestionDocumentoInstalacionController@show');
     Route::get('/gestion-documentos-instalaciones/consultar-documentos','GestionDocumentoInstalacionController@consultar');
     Route::get('/gestion-documentos-instalaciones/ver/{id}','GestionDocumentoInstalacionController@ver');
-    Route::get('/usuarios/modificar/{id}','UserController@edit');
-    Route::put('/usuarios/modificar-usuario','UserController@update');
-    Route::delete('/usuarios/cambiarestado/{id}','UserController@destroy');
+    Route::delete('/gestion-documentos-instalaciones/eliminar/{id}','GestionDocumentoInstalacionController@destroy');
+    Route::get('/gestion-documentos-instalaciones/modificar/{id}','GestionDocumentoInstalacionController@edit');
+    Route::post('/gestion-documentos-instalaciones/modificar','GestionDocumentoInstalacionController@update');
 });
 

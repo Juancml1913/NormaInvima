@@ -1,6 +1,6 @@
 $(document).ready(() => {
-    //Registrar
-    let formCreate = $('#formCreate');
+    //Modificar
+    let formUpdate = $('#formUpdate');
 
     function validateFalse(array) {
         $.each(array, function (k, v) {
@@ -16,12 +16,15 @@ $(document).ready(() => {
         $('div[name=instalacion] small ul').empty();    
     }
 
-    formCreate.on('submit', (event) => {
+    formUpdate.on('submit', (event) => {
         event.preventDefault();
-        let form = new FormData(formCreate[0]);
+        let form = new FormData(formUpdate[0]);
         $.ajax({
-                url: "/gestion-documentos-instalaciones/registrar",
-                type: 'POST',
+                url: "/gestion-documentos-instalaciones/modificar",
+                type: 'post',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 dataType: 'json',
                 data: form,
                 contentType: false,
@@ -30,7 +33,6 @@ $(document).ready(() => {
             .done(function (data) {
                 if (data.validate == true) {
                     if(data.response==true){
-                        formCreate[0].reset();
                         clearMessage();
                         toastr.success(data.message)
                     }else{
@@ -42,7 +44,7 @@ $(document).ready(() => {
                 }
             })
             .fail(function (data) {
-                toastr.error('No se pudo registrar el documento.')
+                toastr.error('No se pudo modificar el documento.')
             });
     });
 });

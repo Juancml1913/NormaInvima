@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\DocumentoInstalacion;
 use App\InstalacionFisica;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class GestionDocumentoInstalacionController extends Controller
 {
@@ -52,18 +53,31 @@ class GestionDocumentoInstalacionController extends Controller
                     'validate' => false
                 ]);
             }
-            $data = $validatedData->getData();
-            $documento = new DocumentoInstalacion();
-            $nombreDocumento = $request->file('documento')->store('public/instalaciones'); // Upload
-            $documento->documento = $nombreDocumento;
-            $documento->descripcion = $data['descripcion'];
-            $documento->id_instalacion=$data['instalacion'];
-            $documento->save();
-
-            return response()->json([
-                'validate' => true,
-                'message' => 'Documento registrado correctamente.'
-            ]);
+            DB::beginTransaction();
+            try {
+                $data = $validatedData->getData();
+                $documento = new DocumentoInstalacion();
+                $nombreDocumento = $request->file('documento')->store('public/instalaciones'); // Upload
+                $documento->documento = $nombreDocumento;
+                $documento->descripcion = $data['descripcion'];
+                $documento->id_instalacion=$data['instalacion'];
+                if(!$documento->save()){
+                    throw new Exception();
+                }
+                DB::commit();
+                return response()->json([
+                    'validate' => true,
+                    'response'=>true,
+                    'message' => 'Documento registrado correctamente.'
+                ]);
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                return response()->json([
+                    'validate' => true,
+                    'response'=>false,
+                    'message' => 'El documento no se pudo registrar correctamente.'
+                ]);
+            }            
         }
     }
 
@@ -104,7 +118,9 @@ class GestionDocumentoInstalacionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $documento=DocumentoInstalacion::findOrFail($id);
+        $instalaciones = InstalacionFisica::where('estado',1)->get();
+        return view('instalacionesFisicas.gestionDocumentos.modificar', compact('documento','instalaciones'));
     }
 
     /**
@@ -114,9 +130,49 @@ class GestionDocumentoInstalacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $validatedData = Validator::make($request->all(), [
+                'descripcion' => 'required|max:255',
+                'instalacion' => 'required|min:1'                    
+            ]);
+            if ($validatedData->fails()) {
+                return response()->json([
+                    'errors' => $validatedData->errors(),
+                    'validate' => false
+                ]);
+            }
+            DB::beginTransaction();
+            try {
+                $data = $validatedData->getData();
+                $documento = DocumentoInstalacion::findOrFail($data['id_documento']);
+                if(!is_null($request->documento)){
+                    \Storage::delete($documento->documento);
+                    $nombreDocumento = $request->file('documento')->store('public/instalaciones'); // Upload
+                    $documento->documento = $nombreDocumento;
+                }
+                
+                $documento->descripcion = $data['descripcion'];
+                $documento->id_instalacion=$data['instalacion'];
+                if(!$documento->save()){
+                    throw new Exception();
+                }
+                DB::commit();
+                return response()->json([
+                    'validate' => true,
+                    'response'=>true,
+                    'message' => 'Documento modificado correctamente.'
+                ]);
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                return response()->json([
+                    'validate' => true,
+                    'response'=>false,
+                    'message' => 'El documento no se pudo modificar correctamente.'
+                ]);
+            }            
+        }
     }
 
     /**
@@ -127,6 +183,25 @@ class GestionDocumentoInstalacionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $documento=DocumentoInstalacion::findOrFail($id);
+            if($documento->delete()){   
+                \Storage::delete($documento->documento);             
+                return response()->json([
+                    'result'=>true,
+                    'message' => 'El documento fue eliminado correctamente.'
+                ]);
+            }            
+            return response()->json([
+                'result'=>false,
+                'message' => 'El documento no fue eliminado correctamente.'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'result'=>false,
+                'message' => 'El documento no fue eliminado correctamente.'
+            ]);
+        }    
+                    
     }
 }
