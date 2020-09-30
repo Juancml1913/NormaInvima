@@ -44,17 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/gestion-instalaciones-fisicas/modificar/{id}','GestionInstalacionFisicaController@edit');
     Route::put('/gestion-instalaciones-fisicas/modificar-instalacion','GestionInstalacionFisicaController@update');
     Route::delete('/gestion-instalaciones-fisicas/cambiarestado/{id}','GestionInstalacionFisicaController@destroy');
-
-
-
-
-
-
-
-
-
-
-
+    
     //Mantenimientos
     Route::get('mantenimiento','MantenimientoController@index');
     Route::get('/mantenimiento/registrar','MantenimientoController@create');
@@ -65,5 +55,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/mantenimiento/modificar','MantenimientoController@update');
     Route::delete('/mantenimiento/eliminar/{id}','MantenimientoController@destroy');
     Route::get('/mantenimiento/ver/{id}','MantenimientoController@ver');
+
+    //Gestión de documentos de instaciones
+    Route::get('/gestion-documentos-instalaciones','GestionDocumentoInstalacionController@index');
+    Route::get('/gestion-documentos-instalaciones/registrar','GestionDocumentoInstalacionController@create');
+    Route::post('/gestion-documentos-instalaciones/registrar','GestionDocumentoInstalacionController@store');
+    Route::get('/gestion-documentos-instalaciones/consultar','GestionDocumentoInstalacionController@show');
+    Route::get('/gestion-documentos-instalaciones/consultar-documentos','GestionDocumentoInstalacionController@consultar');
+    Route::get('/gestion-documentos-instalaciones/ver/{id}','GestionDocumentoInstalacionController@ver');
+    Route::delete('/gestion-documentos-instalaciones/eliminar/{id}','GestionDocumentoInstalacionController@destroy');
+    Route::get('/gestion-documentos-instalaciones/modificar/{id}','GestionDocumentoInstalacionController@edit');
+    Route::post('/gestion-documentos-instalaciones/modificar','GestionDocumentoInstalacionController@update');
 });
 
