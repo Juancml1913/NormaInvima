@@ -45,8 +45,8 @@
                     </a>
                     <div class="collapse" id="collapseInstalaciones" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="">Mantenimiento</a>
-                            <a class="nav-link" href="">Gestión de instalaciones</a>
+                            <a class="nav-link" href="/mantenimiento">Mantenimiento</a>
+                            <a class="nav-link" href="/gestion-instalaciones-fisicas">Gestión de instalaciones</a>
                             <a class="nav-link" href="">Gestión de indicadores</a>
                         </nav>
                     </div>

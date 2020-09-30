@@ -35,5 +35,35 @@ Route::middleware('auth')->group(function () {
     Route::put('/usuarios/modificar-usuario','UserController@update');
     Route::delete('/usuarios/cambiarestado/{id}','UserController@destroy');
 
+    //InstalacionesFisicas
+    Route::get('/gestion-instalaciones-fisicas','GestionInstalacionFisicaController@index');
+    Route::get('/gestion-instalaciones-fisicas/registrar','GestionInstalacionFisicaController@create');
+    Route::post('/gestion-instalaciones-fisicas/registrar','GestionInstalacionFisicaController@store');
+    Route::get('/gestion-instalaciones-fisicas/consultar','GestionInstalacionFisicaController@show');
+    Route::get('/gestion-instalaciones-fisicas/consultar-instalaciones','GestionInstalacionFisicaController@consultar');
+    Route::get('/gestion-instalaciones-fisicas/modificar/{id}','GestionInstalacionFisicaController@edit');
+    Route::put('/gestion-instalaciones-fisicas/modificar-instalacion','GestionInstalacionFisicaController@update');
+    Route::delete('/gestion-instalaciones-fisicas/cambiarestado/{id}','GestionInstalacionFisicaController@destroy');
+
+
+
+
+
+
+
+
+
+
+
+    //Mantenimientos
+    Route::get('mantenimiento','MantenimientoController@index');
+    Route::get('/mantenimiento/registrar','MantenimientoController@create');
+    Route::post('/mantenimiento/registrar','MantenimientoController@store');
+    Route::get('/mantenimiento/consultar','MantenimientoController@show');
+    Route::get('/mantenimiento/consultar-mantenimiento','MantenimientoController@consultar');
+    Route::get('/mantenimiento/modificar/{id}','MantenimientoController@edit');
+    Route::post('/mantenimiento/modificar','MantenimientoController@update');
+    Route::delete('/mantenimiento/eliminar/{id}','MantenimientoController@destroy');
+    Route::get('/mantenimiento/ver/{id}','MantenimientoController@ver');
 });
 
