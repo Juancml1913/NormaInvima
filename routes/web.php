@@ -59,5 +59,11 @@ Route::middleware('auth')->group(function () {
     Route::get('mantenimiento','MantenimientoController@index');
     Route::get('/mantenimiento/registrar','MantenimientoController@create');
     Route::post('/mantenimiento/registrar','MantenimientoController@store');
+    Route::get('/mantenimiento/consultar','MantenimientoController@show');
+    Route::get('/mantenimiento/consultar-mantenimiento','MantenimientoController@consultar');
+    Route::get('/mantenimiento/modificar/{id}','MantenimientoController@edit');
+    Route::post('/mantenimiento/modificar','MantenimientoController@update');
+    Route::delete('/mantenimiento/eliminar/{id}','MantenimientoController@destroy');
+    Route::get('/mantenimiento/ver/{id}','MantenimientoController@ver');
 });
 
