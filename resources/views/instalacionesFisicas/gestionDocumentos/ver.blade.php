@@ -13,7 +13,5 @@
     </div>
 </div>
 @endsection
-@section('scriptsSecond')
-@endsection
 
   
