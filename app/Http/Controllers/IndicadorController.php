@@ -48,8 +48,7 @@ class IndicadorController extends Controller
                 'unidad_medida' => 'required|max:255',
                 'meta' => 'required|max:255',
                 'sentido' => 'required|max:255',
-                'frecuencia' => 'required|max:255',
-                'representacion' => 'required'
+                'frecuencia' => 'required|max:255'
             ]);
 
             if ($validatedData->fails()) {
@@ -72,26 +71,6 @@ class IndicadorController extends Controller
             $indicador->meta = $data['meta'];
             $indicador->sentido = $data['sentido'];
             $indicador->frecuencia = $data['frecuencia'];
-            $indicador->tabla = 0;
-            $indicador->barras = 0;
-            $indicador->torta = 0;
-            $indicador->lineal = 0;
-            foreach ($data['representacion'] as $item) {
-                switch ($item) {
-                    case 1:
-                        $indicador->tabla = 1;
-                        break;
-                    case 2:
-                        $indicador->barras = 1;
-                        break;
-                    case 3:
-                        $indicador->torta = 1;
-                        break;
-                    case 4:
-                        $indicador->lineal = 1;
-                        break;    
-                }
-            }
             if(!$indicador->save()){
                 return response()->json([
                     'errors' => 'El indicador no se pudo registrar correctamente.',
@@ -115,10 +94,6 @@ class IndicadorController extends Controller
         'denominador',
         'complemento',
         'unidad_medida',
-        'tabla',
-        'barras',
-        'torta',
-        'lineal',
         'created_at as creado')->get();
         $info['data']= $indicadores;
         return $info;

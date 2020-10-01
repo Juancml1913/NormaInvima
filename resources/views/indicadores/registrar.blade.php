@@ -66,36 +66,7 @@
                     <label for="frecuencia">Frecuencia:</label>
                     <input type="text" class="form-control" id="frecuencia" name="frecuencia" placeholder="Ingrese frecuencia">
                     <div class="text-danger" name="frecuencia"><small><ul></ul></small></div>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="representacion">Representación:</label><br>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="tabla" name="representacion[]" value="1">
-                        <label class="form-check-label" for="tabla">
-                            Tabla
-                          </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="barras" name="representacion[]" value="2">
-                        <label class="form-check-label" for="barras">
-                            Barras
-                          </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="torta" name="representacion[]" value="3">
-                        <label class="form-check-label" for="torta">
-                            Torta
-                          </label>
-                          
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="lineal" name="representacion[]" value="4">
-                        <label class="form-check-label" for="lineal">
-                            Lineal
-                          </label>                          
-                    </div>
-                    <div class="text-danger" name="representacion"><small><ul></ul></small></div>
-                </div>
+                </div>                
                 <div class=" form-group col-md-4">
                     <label>Acciones:</label><br>
                     <button type="submit" class="btn btn-secondary"><i class="fas fa-save"></i>&nbsp;Guardar</button>

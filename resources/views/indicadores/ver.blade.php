@@ -59,8 +59,35 @@
             <h5>Fecha creación: </h5> <p>{{$indicador['created_at']}}</p>
         </div>
     </div>
+    <hr>
+    <div class="row">
+        <div class="form-group col-md-4 offset-md-4">
+            <label for="representacion"><h6>Representación:</h6></label><br>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkTabla" value="1">
+                <label class="form-check-label" for="tabla">
+                    Tabla
+                  </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkBarras" value="2">
+                <label class="form-check-label" for="barras">
+                    Barras
+                  </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkLineal" value="4">
+                <label class="form-check-label" for="lineal">
+                    Lineal
+                  </label>                          
+            </div>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-secondary"><i class="fas fa-file-pdf"></i>&nbsp;Imprimir</button>
+        </div>
+    </div>
     <div class="row fila-indicador">
-        <div id="div-barras" class="col-md-4" style="display: none;">
+        <div id="div-barras" class="col-md-6" style="display: none;">
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-chart-bar mr-1"></i>
@@ -69,19 +96,7 @@
                 <div class="card-body"><canvas id="barras" width="100%" height="50"></canvas></div>
             </div>
         </div>
-        <div id="div-torta" class="col-md-4" style="display: none;">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-chart-pie mr-1"></i>
-                    Diagrama de torta
-                </div>
-                <div class="card-body"><canvas id="torta" width="100%" height="50"></canvas></div>
-            </div>
-        </div>          
-    </div>
-    <div class="row fila-indicador">
         <div id="div-tabla" class="col-md-6 table-responsive" style="display: none;">
-            Tabla
             <table id="tabla" class="table table-condensed">
                 <thead>
                   <tr>
@@ -94,7 +109,9 @@
                 <tbody>
                 </tbody>
               </table>
-        </div> 
+        </div>     
+    </div>
+    <div class="row fila-indicador">        
         <div id="div-lineal" class="col-md-6" style="display: none;">
             <div class="card mb-4">
                 <div class="card-header">
@@ -110,30 +127,12 @@
 </div>
 @endsection
 @section('scriptsSecond')
-    <script src="{{asset('js/indicadores/ver.js')}}"></script>
     <script>
         let numerador={!!$indicador['numerador']!!};
         let denominador={!!$indicador['denominador']!!};
         let complemento={!!$indicador['complemento']!!};
-        //let unidad_medida={!!$indicador['unidad_medida']!!};
-
-        if({!!$indicador['barras']!!}==1){
-            mostrarBarras(numerador,denominador,complemento);
-            $('#div-barras').show();
-        }
-        if({!!$indicador['torta']!!}==1){
-            mostrarTorta(numerador,denominador,complemento);
-            $('#div-torta').show();
-        }
-        if({!!$indicador['lineal']!!}==1){
-            mostrarLineal();
-            $('#div-lineal').show();
-        }
-        if({!!$indicador['tabla']!!}==1){
-            mostrarTabla(numerador,denominador,complemento);
-            $('#div-tabla').show();
-        }
-        
-        
+        //let unidad_medida={!!$indicador['unidad_medida']!!};    
     </script>
+    <script src="{{asset('js/indicadores/ver.js')}}"></script>
+
 @endsection

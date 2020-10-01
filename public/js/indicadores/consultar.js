@@ -8,10 +8,6 @@ $(document).ready(()=>{
             { "data": "denominador" },
             { "data": "complemento" },
             { "data": "unidad_medida" },
-            { "data": null, render:(data)=>{
-                return (data.tabla==null?'':'tabla')+(data.barras==null?'':' barras')+
-                (data.torta==null?'':' torta')+(data.lineal==null?'':' lineal');
-            } },
             { "data": "creado" },
             {"data":null,render:(data)=>{
                 return '<div>'+

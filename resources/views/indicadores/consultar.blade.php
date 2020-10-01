@@ -17,7 +17,6 @@
                         <th>Denominador</th>
                         <th>Complemento</th>
                         <th>Unidad de medida</th>
-                        <th>Representación</th>
                         <th>Creado</th>
                         <th>Acciones</th>
                     </tr>
