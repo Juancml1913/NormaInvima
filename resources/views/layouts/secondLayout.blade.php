@@ -1,16 +1,11 @@
 @extends('layouts.mainLayout')
 @section('estilos')    
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/DataTables/datatables.min.css')}}"/>
 @endsection
 
-@section('scripts')
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('assets/demo/chart-area-demo.js')}}"></script>
-    <script src="{{ asset('assets/demo/chart-bar-demo.js')}}"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('assets/demo/datatables-demo.js')}}"></script>
+@section('scripts')    
+<script type="text/javascript" src="{{asset('assets/Chart/Chart.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/DataTables/datatables.min.js')}}"></script>
     @yield('scriptsSecond')
 @endsection
 
