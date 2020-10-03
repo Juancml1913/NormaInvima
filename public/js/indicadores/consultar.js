@@ -13,6 +13,8 @@ $(document).ready(()=>{
                 return '<div>'+
                 '<a class="btn" href="/indicadores/ver/'+data.id+'" data-toggle="tooltip" data-placement="top" title="Ver">'+
                                 '<i class="fa fa-file" aria-hidden="true"></i></a>'+
+                            '<a class="btn" href="/indicadores/modificar/'+data.id+'" data-toggle="tooltip" data-placement="top" title="Modificar">'+
+                               '<i class="fas fa-edit"></i></a>'+
                             '<button id="eliminar" onclick="setId('+data.id+')" data-toggle="modal" data-target="#ConfirmModal" class="btn" data-toggle="tooltip" data-placement="top" title="Eliminar">'+
                             '<i class="fa fa-trash"></i></a>'+'</button>'+
                 '</div>';

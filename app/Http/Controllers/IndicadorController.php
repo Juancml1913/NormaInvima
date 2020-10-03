@@ -123,7 +123,8 @@ class IndicadorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $indicador=Indicador::findOrFail($id);
+        return view('indicadores.modificar', compact('indicador'));
     }
 
     /**
@@ -133,9 +134,57 @@ class IndicadorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $validatedData = Validator::make($request->all(), [
+                'nombre' => 'required|max:255',
+                'objetivo' => 'required|max:255',
+                'alcance' => 'required|max:255',
+                'numerador' => 'required|numeric',
+                'denominador' => 'required|numeric',
+                'complemento' => 'required|numeric',
+                'responsables' => 'required|max:255',
+                'unidad_medida' => 'required|max:255',
+                'meta' => 'required|max:255',
+                'sentido' => 'required|max:255',
+                'frecuencia' => 'required|max:255'
+            ]);
+
+            if ($validatedData->fails()) {
+                return response()->json([
+                    'errors' => $validatedData->errors(),
+                    'validate' => false,
+                    'result' =>false
+                ]);
+            }
+            $data = $validatedData->getData();
+            $indicador = Indicador::findOrFail($data['id']);
+            $indicador->nombre = $data['nombre'];
+            $indicador->objetivo = $data['objetivo'];
+            $indicador->alcance = $data['alcance'];
+            $indicador->numerador = $data['numerador'];
+            $indicador->denominador = $data['denominador'];
+            $indicador->complemento = $data['complemento'];
+            $indicador->responsables = $data['responsables'];
+            $indicador->unidad_medida = $data['unidad_medida'];
+            $indicador->meta = $data['meta'];
+            $indicador->sentido = $data['sentido'];
+            $indicador->frecuencia = $data['frecuencia'];
+            if(!$indicador->save()){
+                return response()->json([
+                    'errors' => 'El indicador no se pudo modificar correctamente.',
+                    'validate' => false,
+                    'result' =>true
+                ]);
+            }
+
+            return response()->json([
+                'validate' => true,
+                'result' =>true,
+                'message' => 'Indicador modificado correctamente.'
+            ]);
+        }
     }
 
     /**

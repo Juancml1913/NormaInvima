@@ -75,5 +75,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/indicadores/consultar-indicadores','IndicadorController@consultar');
     Route::delete('/indicadores/eliminar/{id}','IndicadorController@destroy');
     Route::get('/indicadores/ver/{id}','IndicadorController@ver');
+    Route::get('/indicadores/modificar/{id}','IndicadorController@edit');
+    Route::put('/indicadores/modificar/','IndicadorController@update');
 });
 
