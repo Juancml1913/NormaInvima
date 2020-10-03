@@ -1,6 +1,7 @@
 @extends('layouts.mainLayout')
-@section('estilos')    
+@section('estilos')
     <link rel="stylesheet" type="text/css" href="{{asset('assets/DataTables/datatables.min.css')}}"/>
+    @yield('estilosSecond')
 @endsection
 
 @section('scripts')    
@@ -33,7 +34,7 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                         Inicio
                     </a>
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInstalaciones" aria-expanded="false" aria-controls="collapseInstalaciones">
+                    <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseInstalaciones" aria-expanded="false" aria-controls="collapseInstalaciones">
                         <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
                         Instalaciones físicas
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -43,9 +44,12 @@
                             <a class="nav-link" href="/mantenimiento">Mantenimiento</a>
                             <a class="nav-link" href="/gestion-instalaciones-fisicas">Gestión de instalaciones</a>
                             <a class="nav-link" href="/gestion-documentos-instalaciones">Documentos de instalaciones</a>
-                            <a class="nav-link" href="">Gestión de indicadores</a>
                         </nav>
                     </div>
+                    <a class="nav-link" href="/indicadores">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
+                        Indicadores 
+                    </a>  
                     <a class="nav-link" href="/usuarios">
                         <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                         Usuarios 

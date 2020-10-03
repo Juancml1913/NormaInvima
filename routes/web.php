@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/gestion-instalaciones-fisicas/cambiarestado/{id}','GestionInstalacionFisicaController@destroy');
     
     //Mantenimientos
-    Route::get('mantenimiento','MantenimientoController@index');
+    Route::get('/mantenimiento','MantenimientoController@index');
     Route::get('/mantenimiento/registrar','MantenimientoController@create');
     Route::post('/mantenimiento/registrar','MantenimientoController@store');
     Route::get('/mantenimiento/consultar','MantenimientoController@show');
@@ -66,5 +66,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/gestion-documentos-instalaciones/eliminar/{id}','GestionDocumentoInstalacionController@destroy');
     Route::get('/gestion-documentos-instalaciones/modificar/{id}','GestionDocumentoInstalacionController@edit');
     Route::post('/gestion-documentos-instalaciones/modificar','GestionDocumentoInstalacionController@update');
+
+    //Indicadores
+    Route::get('/indicadores','IndicadorController@index');
+    Route::get('/indicadores/registrar','IndicadorController@create');
+    Route::post('/indicadores/registrar','IndicadorController@store');
+    Route::get('/indicadores/consultar','IndicadorController@show');
+    Route::get('/indicadores/consultar-indicadores','IndicadorController@consultar');
+    Route::delete('/indicadores/eliminar/{id}','IndicadorController@destroy');
+    Route::get('/indicadores/ver/{id}','IndicadorController@ver');
+    Route::get('/indicadores/modificar/{id}','IndicadorController@edit');
+    Route::put('/indicadores/modificar/','IndicadorController@update');
 });
 
