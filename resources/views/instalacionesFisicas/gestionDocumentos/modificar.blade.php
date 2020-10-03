@@ -29,7 +29,7 @@
                     <div class="text-danger" name="descripcion"><small><ul></ul></small></div>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="descripcion">Documento:</label>
+                    <label for="documento">Documento:</label>
                     <input type="file" multiple="false" class="form-control" id="documento" name="documento" placeholder="Ingrese documento">
                     <div class="text-danger" name="documento"><small><ul></ul></small></div>
                 </div>
