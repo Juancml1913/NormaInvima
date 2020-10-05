@@ -77,5 +77,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/indicadores/ver/{id}','IndicadorController@ver');
     Route::get('/indicadores/modificar/{id}','IndicadorController@edit');
     Route::put('/indicadores/modificar/','IndicadorController@update');
+    Route::get('/indicadores/imprimir/{id}','IndicadorController@imprimir');
 });
 

@@ -201,4 +201,10 @@ class IndicadorController extends Controller
         }
         return response()->json(['result'=>false,'message' => 'El indicador no se pudo eliminar exitosamente.']);
     }
+
+    public function imprimir($id){
+        $indicador=Indicador::findOrFail($id);
+        $pdf=\PDF::loadView('indicadores.imprimir',compact('indicador'));
+        return $pdf->stream();
+    }
 }
