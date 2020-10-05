@@ -83,7 +83,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-secondary"><i class="fas fa-file-pdf"></i>&nbsp;Imprimir</button>
+            <a class="btn btn-secondary" href="/indicadores/imprimir/{{$indicador['id']}}"><i class="fas fa-file-pdf"></i>&nbsp;Imprimir</a>
         </div>
     </div>
     <div class="row fila-indicador">
