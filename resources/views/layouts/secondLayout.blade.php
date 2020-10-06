@@ -34,7 +34,7 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                         Inicio
                     </a>
-                    <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseInstalaciones" aria-expanded="false" aria-controls="collapseInstalaciones">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInstalaciones" aria-expanded="false" aria-controls="collapseInstalaciones">
                         <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
                         Instalaciones físicas
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -61,7 +61,7 @@
                     </a>
                     <div class="collapse" id="collapseConfiguracion" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="">Instalaciones físicas</a>
+                            <a class="nav-link" href="/configuracion/mantenimiento">Mantenimiento</a>
                     </div> 
                                          
                 </div>

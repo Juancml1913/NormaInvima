@@ -78,5 +78,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/indicadores/modificar/{id}','IndicadorController@edit');
     Route::put('/indicadores/modificar/','IndicadorController@update');
     Route::get('/indicadores/imprimir/{id}','IndicadorController@imprimir');
+
+    //Configuración
+    Route::get('/configuracion/mantenimiento','ConfiguracionController@indexMantenimiento');
+    Route::get('/configuracion/mantenimiento/registrar','ConfiguracionController@createMantenimiento');
+    Route::post('/configuracion/mantenimiento/registrar','ConfiguracionController@storeMantenimiento');
+    Route::get('/configuracion/mantenimiento/consultar','ConfiguracionController@showMantenimiento');
+    Route::get('/configuracion/mantenimiento/consultar-mantenimiento','ConfiguracionController@consultarMantenimiento');
+    Route::get('/configuracion/mantenimiento/modificar/{id}','ConfiguracionController@editMantenimiento');
+    Route::post('/configuracion/mantenimiento/modificar','ConfiguracionController@updateMantenimiento');
+    Route::delete('/configuracion/mantenimiento/eliminar/{id}','ConfiguracionController@destroyMantenimiento');
 });
 
