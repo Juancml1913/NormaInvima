@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group col-md-3" id="div_fecha_proxima">
                     <label for="fecha_proxima">Fecha próxima:</label>
-                    <input type="date" class="form-control" id="fecha_proxima" name="fecha_proxima" placeholder="Ingrese fecha">
+                    <input type="date" class="form-control" id="fecha_proxima" name="fecha_proxima" placeholder="Ingrese fecha" readonly>
                     <div class="text-danger" name="fecha_proxima"><small><ul></ul></small></div>
                 </div>
                 <div class="form-group col-md-6">
@@ -51,7 +51,6 @@
                     <label>Acciones:</label><br>
                     <button type="submit" class="btn btn-secondary"><i class="fas fa-save"></i>&nbsp;Guardar</button>
                     <button type="reset" id="rest" class="btn btn-secondary"><i class="fas fa-broom"></i>&nbsp;Limpiar</button>
-                    <hr>
                 </div>              
 
                 <!-- <div class="form-group col-md-12">

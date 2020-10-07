@@ -17,13 +17,13 @@ Route::middleware('guest')->group(function () {
 });
 Route::middleware('auth')->group(function () {
     //Inicio
-    Route::get('/inicio', function () {
-        return view('layouts.secondLayout');
-    });
+    Route::get('/inicio','HomeController@index');
+
     Route::get('/logout', function () {
 		Auth::logout();
 		return redirect('/');
-	});
+    });
+    Route::post('/save-subscription','HomeController@guardarSuscripcion');
     
     //Usuarios
     Route::get('/usuarios','UserController@indexUser');
@@ -88,5 +88,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/configuracion/mantenimiento/modificar/{id}','ConfiguracionController@editMantenimiento');
     Route::post('/configuracion/mantenimiento/modificar','ConfiguracionController@updateMantenimiento');
     Route::delete('/configuracion/mantenimiento/eliminar/{id}','ConfiguracionController@destroyMantenimiento');
+    Route::get('/configuracion/mantenimiento/consultar-fecha-proxima/{id_instalacion}/{fecha}','MantenimientoController@getFechaProxima');
 });
 

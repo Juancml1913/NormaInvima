@@ -4,8 +4,8 @@
     @yield('estilosSecond')
 @endsection
 
-@section('scripts')    
-<script type="text/javascript" src="{{asset('assets/Chart/Chart.min.js')}}"></script>
+@section('scripts')
+    <script type="text/javascript" src="{{asset('assets/Chart/Chart.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/DataTables/datatables.min.js')}}"></script>
     @yield('scriptsSecond')
 @endsection

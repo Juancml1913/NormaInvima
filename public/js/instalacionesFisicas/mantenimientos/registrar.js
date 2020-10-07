@@ -1,6 +1,10 @@
 $(document).ready(() => {
     //Registrar
     let formCreate = $('#formCreate');
+    let fecha=$('#fecha');
+    $('#div_fecha_proxima').hide();
+    fecha.prop('readonly', true);
+    let instalacion=$('#instalacion');
 
     function validateFalse(array) {
         $.each(array, function (k, v) {
@@ -28,6 +32,16 @@ $(document).ready(() => {
         }
     })
 
+    instalacion.change(() => {
+        fecha.val("");
+        $('#fecha_proxima').val("");
+		if(instalacion.val() != ''){            
+            fecha.prop('readonly', false);
+        }else{
+            fecha.prop('readonly', true);
+        }
+    })
+
     formCreate.on('submit', (event) => {
         event.preventDefault();
         let form = new FormData(formCreate[0]);
@@ -40,17 +54,44 @@ $(document).ready(() => {
                 processData: false
             })
             .done(function (data) {
-                if (data.validate == true) {
-                    formCreate[0].reset();
-                    clearMessage();
-                    toastr.success(data.message)
-                } else {
-                    clearMessage();
-                    validateFalse(data.errors);
+                if(data.result){
+                    if (data.validate == true) {
+                        formCreate[0].reset();
+                        clearMessage();
+                        toastr.success(data.message)
+                    } else {
+                        clearMessage();
+                        validateFalse(data.errors);
+                    }
+                }else{
+                    toastr.error(data.message)
                 }
+                
             })
             .fail(function (data) {
                 toastr.error('No se pudo registrar el mantenimiento.')
             });
+    });
+
+    fecha.change(() => {
+        if(fecha.val()==""){
+            $('#fecha_proxima').val("");
+        }else{
+            $.ajax({
+                url: "/configuracion/mantenimiento/consultar-fecha-proxima/"+instalacion.val()+"/"+fecha.val(),
+                type: 'GET',
+                dataType: 'json'
+            })
+            .done(function (data) {
+                if (data.result == true) {
+                    $('#fecha_proxima').val(data.fecha_proxima);
+                } else {
+                    toastr.error(data.message);
+                }
+            })
+            .fail(function (data) {
+                toastr.error('No se pudo consultar la fecha proxima del mantenimiento.')
+            });
+        }        
     });
 });

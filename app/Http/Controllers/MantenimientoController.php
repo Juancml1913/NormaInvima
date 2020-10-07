@@ -7,6 +7,8 @@ use App\Mantenimiento;
 use Illuminate\Support\Facades\Validator;
 use App\InstalacionFisica;
 use Illuminate\Support\Facades\DB;
+use App\ConfiguracionMantenimiento;
+use Illuminate\Support\Carbon;
 
 class MantenimientoController extends Controller
 {
@@ -59,7 +61,13 @@ class MantenimientoController extends Controller
             $Mantenimiento->tipo = $data['tipo'];
             $Mantenimiento->id_instalacion = $data['instalacion'];
             $Mantenimiento->fecha = $data['fecha'];
-            if(!is_null($request->fecha_proxima)){
+            if($Mantenimiento->tipo==1){
+                if(is_null($request->fecha_proxima)){
+                    return response()->json([
+                        'result' => false,
+                        'message' => 'El mantenimiento no se pudo registrar correctamente.'
+                    ]);
+                }
                 $Mantenimiento->fecha_proxima = $data['fecha_proxima'];
             }
             if(!is_null($request->documento)){
@@ -69,10 +77,27 @@ class MantenimientoController extends Controller
             $Mantenimiento->save();
 
             return response()->json([
+                'result' => true,
                 'validate' => true,
                 'message' => 'Mantenimiento registrado correctamente.'
             ]);
         }
+    }
+
+    function getFechaProxima($id_instalacion, $fecha){
+        $configuracion=ConfiguracionMantenimiento::where('id_instalacion',$id_instalacion)->first();
+        if($configuracion==null){
+            return response()->json([
+                'result' => false,
+                'message' => 'No se encontró un periodo para el mantenimiento de esta instalación.'
+            ]);
+        }
+        $date = new Carbon($fecha);
+        $date->addDays($configuracion->periodo_dias);
+        return response()->json([
+            'result' => true,
+            'fecha_proxima' => $date->toDateString()
+        ]);
     }
 
     /**
@@ -138,7 +163,6 @@ class MantenimientoController extends Controller
                     'validate' => false
                 ]);
             }
-            DB::beginTransaction();
             try {
                 $data = $validatedData->getData();
                 $mantenimiento = Mantenimiento::findOrFail($data['id']);
@@ -151,23 +175,29 @@ class MantenimientoController extends Controller
                 $mantenimiento->tipo = $data['tipo'];
                 $mantenimiento->id_instalacion = $data['instalacion'];
                 $mantenimiento->fecha = $data['fecha'];
-                if(!is_null($request->fecha_proxima)){
+                if($mantenimiento->tipo==1){
+                    if(is_null($request->fecha_proxima)){
+                        return response()->json([
+                            'result' => false,
+                            'message' => 'El mantenimiento no se pudo registrar correctamente.'
+                        ]);
+                    }
                     $mantenimiento->fecha_proxima = $data['fecha_proxima'];
+                }else{
+                    $mantenimiento->fecha_proxima = null;
                 }
                 if(!$mantenimiento->save()){
                     throw new Exception();
                 }
-                DB::commit();
                 return response()->json([
                     'validate' => true,
-                    'response'=>true,
+                    'result'=>true,
                     'message' => 'Mantenimiento modificado correctamente.'
                 ]);
             } catch (\Throwable $th) {
-                DB::rollBack();
                 return response()->json([
                     'validate' => true,
-                    'response'=>false,
+                    'result'=>false,
                     'message' => 'El mantenimiento no se pudo modificar correctamente.'
                 ]);
             }            
