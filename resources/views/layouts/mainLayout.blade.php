@@ -143,7 +143,7 @@
                         throw new Error('Bad response from server.');
                     }
                 });*/
-            return fetch('/api/save-subscription/{{Auth::user()->id}}', {
+            return fetch('/api/save-subscription/{{Auth::check()==true?Auth::user()->id:''}}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

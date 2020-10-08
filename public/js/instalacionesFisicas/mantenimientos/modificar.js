@@ -1,8 +1,8 @@
 $(document).ready(() => {
     //Modificar
     let formUpdate = $('#formUpdate');
-    let fecha=$('#fecha');
-    let instalacion=$('#instalacion');
+    let fecha = $('#fecha');
+    let instalacion = $('#instalacion');
 
     function validateFalse(array) {
         $.each(array, function (k, v) {
@@ -17,7 +17,7 @@ $(document).ready(() => {
         $('div[name=instalacion] small ul').empty();
         $('div[name=fecha] small ul').empty();
         $('div[name=fecha_proxima] small ul').empty();
-        $('div[name=documento] small ul').empty();  
+        $('div[name=documento] small ul').empty();
     }
 
     formUpdate.on('submit', (event) => {
@@ -35,7 +35,7 @@ $(document).ready(() => {
                 processData: false
             })
             .done(function (data) {
-                if(data.result){
+                if (data.result) {
                     if (data.validate == true) {
                         clearMessage();
                         toastr.success(data.message)
@@ -43,7 +43,7 @@ $(document).ready(() => {
                         clearMessage();
                         validateFalse(data.errors);
                     }
-                }else{
+                } else {
                     toastr.error(data.message)
                 }
             })
@@ -54,10 +54,10 @@ $(document).ready(() => {
 
     let tipo = $('#tipo');
 
-	tipo.change(() => { 
-		if(tipo.val() == "1"){
+    tipo.change(() => {
+        if (tipo.val() == "1") {
             $('#div_fecha_proxima').show();
-        }else if (tipo.val() == "2"){
+        } else if (tipo.val() == "2") {
             $('#div_fecha_proxima').hide();
         }
     })
@@ -65,33 +65,35 @@ $(document).ready(() => {
     instalacion.change(() => {
         fecha.val("");
         $('#fecha_proxima').val("");
-		if(instalacion.val() != ''){            
+        if (instalacion.val() != '') {
             fecha.prop('readonly', false);
-        }else{
+        } else {
             fecha.prop('readonly', true);
         }
     })
 
 
     fecha.change(() => {
-        if(fecha.val()==""){
-            $('#fecha_proxima').val("");
-        }else{
-            $.ajax({
-                url: "/configuracion/mantenimiento/consultar-fecha-proxima/"+instalacion.val()+"/"+fecha.val(),
-                type: 'GET',
-                dataType: 'json'
-            })
-            .done(function (data) {
-                if (data.result == true) {
-                    $('#fecha_proxima').val(data.fecha_proxima);
-                } else {
-                    toastr.error(data.message);
-                }
-            })
-            .fail(function (data) {
-                toastr.error('No se pudo consultar la fecha proxima del mantenimiento.')
-            });
-        }        
+        if (tipo.val() == '1') {
+            if (fecha.val() == "") {
+                $('#fecha_proxima').val("");
+            } else {
+                $.ajax({
+                        url: "/configuracion/mantenimiento/consultar-fecha-proxima/" + instalacion.val() + "/" + fecha.val(),
+                        type: 'GET',
+                        dataType: 'json'
+                    })
+                    .done(function (data) {
+                        if (data.result == true) {
+                            $('#fecha_proxima').val(data.fecha_proxima);
+                        } else {
+                            toastr.error(data.message);
+                        }
+                    })
+                    .fail(function (data) {
+                        toastr.error('No se pudo consultar la fecha proxima del mantenimiento.')
+                    });
+            }
+        }
     });
 });

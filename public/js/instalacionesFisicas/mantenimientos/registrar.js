@@ -74,24 +74,26 @@ $(document).ready(() => {
     });
 
     fecha.change(() => {
-        if(fecha.val()==""){
-            $('#fecha_proxima').val("");
-        }else{
-            $.ajax({
-                url: "/configuracion/mantenimiento/consultar-fecha-proxima/"+instalacion.val()+"/"+fecha.val(),
-                type: 'GET',
-                dataType: 'json'
-            })
-            .done(function (data) {
-                if (data.result == true) {
-                    $('#fecha_proxima').val(data.fecha_proxima);
-                } else {
-                    toastr.error(data.message);
-                }
-            })
-            .fail(function (data) {
-                toastr.error('No se pudo consultar la fecha proxima del mantenimiento.')
-            });
-        }        
+        if(tipo.val()=='1'){
+            if(fecha.val()==""){
+                $('#fecha_proxima').val("");
+            }else{
+                $.ajax({
+                    url: "/configuracion/mantenimiento/consultar-fecha-proxima/"+instalacion.val()+"/"+fecha.val(),
+                    type: 'GET',
+                    dataType: 'json'
+                })
+                .done(function (data) {
+                    if (data.result == true) {
+                        $('#fecha_proxima').val(data.fecha_proxima);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                })
+                .fail(function (data) {
+                    toastr.error('No se pudo consultar la fecha proxima del mantenimiento.')
+                });
+            }   
+        }             
     });
 });
