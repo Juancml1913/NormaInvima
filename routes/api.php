@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request, $id) {
     return $request->user();
 });
 
-Route::post('/save-subscription',function(Request $request){
-    $user = \App\User::find(2);
+Route::post('/save-subscription/{id}',function(Request $request, $id){
+    $user = User::find($id);
     $user->updatePushSubscription($request->input('endpoint'), $request->input('keys.p256dh'), $request->input('keys.auth'));
-    $user->notify(new \App\Notifications\Alerta("Mensaje", "Suscribción"));
+    //$user->notify(new \App\Notifications\Alerta("Mensaje", "Suscribción"));
     return response()->json([
       'success' => true
     ]);

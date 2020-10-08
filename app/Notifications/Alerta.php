@@ -38,27 +38,10 @@ class Alerta extends Notification
 
     public function toWebPush($notifiable, $notification)
     {
-      $time = \Carbon\Carbon::now();
       return (new WebPushMessage)
             ->title($this->title)
-            ->icon(url('images/alerta.png'))
-            ->body($this->body);
-            // ->data(['id' => $notification->id])
-            // ->badge()
-            // ->dir()
-            // ->image()
-            // ->lang()
-            // ->renotify()
-            // ->requireInteraction()
-            // ->tag()
-            // ->vibrate()
-        /*return WebPushMessage::create()
-            // ->id($notification->id)
-            ->title($this->title)
-            ->icon(url('images/push.png'))
-            ->body($this->body);
-            //->action('View account', 'view_account');*/
-            
+            ->icon('images/alerta.png')
+            ->body($this->body);            
     }
 
     /**
