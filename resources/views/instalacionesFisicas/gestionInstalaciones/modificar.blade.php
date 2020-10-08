@@ -31,7 +31,6 @@
                     <label>Acciones:</label><br>
                     <button type="submit" class="btn btn-secondary"><i class="fas fa-save"></i>&nbsp;Modificar</button>
                     <button type="reset" id="rest" class="btn btn-secondary"><i class="fas fa-broom"></i>&nbsp;Limpiar</button>
-                    <hr>
                 </div>
                                 
 
