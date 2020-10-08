@@ -18,12 +18,151 @@
 <body>
     @yield('contenido')
     <script src="{{asset('assets/Jquery/jquery-3.5.1.min.js')}}" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>-->
     <script src="{{ asset('assets/bootstrap-notify-3.1.3/bootstrap-notify.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="{{asset('assets/bootstrap-4.5.2-dist/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('assets/toastr/toastr.min.js')}}"></script>
     <script src="{{ asset('js/scripts.js')}}"></script>
     @yield('scripts')
+    <script type="text/javascript">
+        // Initialize the service worker
+        /*if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/serviceworker.js', {
+                scope: '.'
+            }).then(function (registration) {
+                // Registration was successful
+                console.log('Laravel PWA: ServiceWorker registration successful with scope: ', registration.scope);
+            }, function (err) {
+                // registration failed :(
+                console.log('Laravel PWA: ServiceWorker registration failed: ', err);
+            });
+        }*/
+        var _registration = null;
+    
+        function registerServiceWorker() {
+            return navigator.serviceWorker.register('/serviceworker.js')
+                .then(function (registration) {
+                    console.log('Service worker successfully registered.');
+                    _registration = registration;
+                    askPermission();
+                    return registration;
+                })
+                .catch(function (err) {
+                    console.error('Unable to register service worker.', err);
+                });
+        }
+    
+        function askPermission() {
+            return new Promise(function (resolve, reject) {
+                    const permissionResult = Notification.requestPermission(function (result) {
+                        resolve(result);
+                    });
+                    if (permissionResult) {
+                        permissionResult.then(resolve, reject);
+                    }
+                })
+                .then(function (permissionResult) {
+                    if (permissionResult !== 'granted') {
+                        throw new Error('We weren\'t granted permission.');
+                    } else {
+                        subscribeUserToPush();
+                    }
+                });
+        }
+    
+        function urlBase64ToUint8Array(base64String) {
+            const padding = '='.repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding)
+                .replace(/\-/g, '+')
+                .replace(/_/g, '/');
+            const rawData = window.atob(base64);
+            const outputArray = new Uint8Array(rawData.length);
+            for (let i = 0; i < rawData.length; ++i) {
+                outputArray[i] = rawData.charCodeAt(i);
+            }
+            return outputArray;
+        }
+    
+        function getSWRegistration() {
+            var promise = new Promise(function (resolve, reject) {
+                // do a thing, possibly async, then…
+                if (_registration != null) {
+                    resolve(_registration);
+                } else {
+                    reject(Error("It broke"));
+                }
+            });
+            return promise;
+        }
+    
+        function subscribeUserToPush() {
+            getSWRegistration()
+                .then(function (registration) {
+                    console.log(registration);
+                    const subscribeOptions = {
+                        userVisibleOnly: true,
+                        applicationServerKey: urlBase64ToUint8Array(
+                            "{{ env('VAPID_PUBLIC_KEY') }}"
+                        )
+                    };
+                    return registration.pushManager.subscribe(subscribeOptions);
+                })
+                .then(function (pushSubscription) {
+                    console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
+                    sendSubscriptionToBackEnd(pushSubscription);
+                    return pushSubscription;
+                });
+        }
+    
+        function sendSubscriptionToBackEnd(subscription) {
+            /*return $.ajax({
+                    url: "/save-subscription",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {'data':JSON.stringify(subscription)}
+                })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Bad status code from server.');
+                    }
+                    return response.json();
+                })
+                .then(function (responseData) {
+                    if (!(responseData.data && responseData.data.success)) {
+                        throw new Error('Bad response from server.');
+                    }
+                });*/
+            return fetch('/api/save-subscription', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(subscription)
+                })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Bad status code from server.');
+                    }
+                    return response.json();
+                })
+                .then(function (responseData) {
+                    if (!(responseData.data && responseData.data.success)) {
+                        throw new Error('Bad response from server.');
+                    }
+                });
+        }
+    
+        function enableNotifications() {
+            //register service worker
+            //check permission for notification/ask
+            askPermission();
+        }
+        registerServiceWorker();
+    
+    </script>
 </body>
 </html>

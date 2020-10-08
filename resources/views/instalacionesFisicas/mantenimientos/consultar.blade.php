@@ -1,7 +1,7 @@
 @extends('layouts.secondLayout')
 @section('contenidoSecond')
 <div class="container-fluid">
-    <h1 class="mt-4">Mantenimieto de instalaciones</h1>
+    <h1 class="mt-4">Mantenimiento de instalaciones</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
         <li class="breadcrumb-item"><a href="/mantenimiento">Mantenimiento</a></li>
