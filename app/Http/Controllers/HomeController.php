@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.secondLayout');
+        return view('inicio');
     }
 
     public function guardarSuscripcion(Request $request){

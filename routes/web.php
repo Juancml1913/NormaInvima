@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/usuarios/modificar/{id}','UserController@edit');
     Route::put('/usuarios/modificar-usuario','UserController@update');
     Route::delete('/usuarios/cambiarestado/{id}','UserController@destroy');
+    Route::post('/usuarios/cambiarcontrasena','UserController@cambiarPassword');
 
     //InstalacionesFisicas
     Route::get('/gestion-instalaciones-fisicas','GestionInstalacionFisicaController@index');

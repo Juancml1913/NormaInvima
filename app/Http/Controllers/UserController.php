@@ -220,4 +220,34 @@ class UserController extends Controller
             return response()->json(['result'=>false,'message' => 'El estado no se cambió exitosamente.']);
         }
     }
+
+    public function cambiarPassword(Request $request){
+        if ($request->ajax()) {
+            $validatedData = Validator::make($request->all(), [
+                'password_antiguo' => 'required|password',
+                'password' => 'required|confirmed|max:8'
+            ]);
+
+            if ($validatedData->fails()) {
+                return response()->json([
+                    'errors' => $validatedData->errors(),
+                    'validate' => false
+                ]);
+            }
+            $data = $validatedData->getData();
+            $user =User::find(Auth::user()->id);
+            $user->password = Hash::make($data['password']);
+            if($user->save()!=1){
+                return response()->json([
+                    'validate' => false,
+                    'message' => 'La contraseña no se pudo cambiar correctamente.'
+                ]);
+            }
+
+            return response()->json([
+                'validate' => true,
+                'message' => 'Contraseña cambiada correctamente.'
+            ]);
+        }
+    }
 }
