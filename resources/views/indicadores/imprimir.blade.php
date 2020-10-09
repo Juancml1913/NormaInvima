@@ -26,7 +26,7 @@
             }
         }        
         </style>
-        
+        <title>{{$indicador['nombre']}}</title>
 </head>
 <body  style="font-size: 1em; font-family: helvetica; padding: 20px;" >
     <div style="position: relative; width: 100%;">

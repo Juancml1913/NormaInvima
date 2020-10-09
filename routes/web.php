@@ -24,17 +24,6 @@ Route::middleware('auth')->group(function () {
 		return redirect('/');
     });
     Route::post('/save-subscription','HomeController@guardarSuscripcion');
-    
-    //Usuarios
-    Route::get('/usuarios','UserController@indexUser');
-    Route::get('/usuarios/registrar','UserController@create');
-    Route::post('/usuarios/registrar','UserController@store');
-    Route::get('/usuarios/consultar','UserController@show');
-    Route::get('/usuarios/consultar-usuarios','UserController@consultar');
-    Route::get('/usuarios/modificar/{id}','UserController@edit');
-    Route::put('/usuarios/modificar-usuario','UserController@update');
-    Route::delete('/usuarios/cambiarestado/{id}','UserController@destroy');
-    Route::post('/usuarios/cambiarcontrasena','UserController@cambiarPassword');
 
     //InstalacionesFisicas
     Route::get('/gestion-instalaciones-fisicas','GestionInstalacionFisicaController@index');
@@ -80,15 +69,29 @@ Route::middleware('auth')->group(function () {
     Route::put('/indicadores/modificar/','IndicadorController@update');
     Route::get('/indicadores/imprimir/{id}','IndicadorController@imprimir');
 
-    //Configuración
-    Route::get('/configuracion/mantenimiento','ConfiguracionController@indexMantenimiento');
-    Route::get('/configuracion/mantenimiento/registrar','ConfiguracionController@createMantenimiento');
-    Route::post('/configuracion/mantenimiento/registrar','ConfiguracionController@storeMantenimiento');
-    Route::get('/configuracion/mantenimiento/consultar','ConfiguracionController@showMantenimiento');
-    Route::get('/configuracion/mantenimiento/consultar-mantenimiento','ConfiguracionController@consultarMantenimiento');
-    Route::get('/configuracion/mantenimiento/modificar/{id}','ConfiguracionController@editMantenimiento');
-    Route::post('/configuracion/mantenimiento/modificar','ConfiguracionController@updateMantenimiento');
-    Route::delete('/configuracion/mantenimiento/eliminar/{id}','ConfiguracionController@destroyMantenimiento');
-    Route::get('/configuracion/mantenimiento/consultar-fecha-proxima/{id_instalacion}/{fecha}','MantenimientoController@getFechaProxima');
+    Route::middleware('admin')->group(function () {
+      //Usuarios
+      Route::get('/usuarios','UserController@indexUser');
+      Route::get('/usuarios/registrar','UserController@create');
+      Route::post('/usuarios/registrar','UserController@store');
+      Route::get('/usuarios/consultar','UserController@show');
+      Route::get('/usuarios/consultar-usuarios','UserController@consultar');
+      Route::get('/usuarios/modificar/{id}','UserController@edit');
+      Route::put('/usuarios/modificar-usuario','UserController@update');
+      Route::delete('/usuarios/cambiarestado/{id}','UserController@destroy');
+      Route::post('/usuarios/cambiarcontrasena','UserController@cambiarPassword');
+
+      //Configuración
+      Route::get('/configuracion/mantenimiento','ConfiguracionController@indexMantenimiento');
+      Route::get('/configuracion/mantenimiento/registrar','ConfiguracionController@createMantenimiento');
+      Route::post('/configuracion/mantenimiento/registrar','ConfiguracionController@storeMantenimiento');
+      Route::get('/configuracion/mantenimiento/consultar','ConfiguracionController@showMantenimiento');
+      Route::get('/configuracion/mantenimiento/consultar-mantenimiento','ConfiguracionController@consultarMantenimiento');
+      Route::get('/configuracion/mantenimiento/modificar/{id}','ConfiguracionController@editMantenimiento');
+      Route::post('/configuracion/mantenimiento/modificar','ConfiguracionController@updateMantenimiento');
+      Route::delete('/configuracion/mantenimiento/eliminar/{id}','ConfiguracionController@destroyMantenimiento');
+      Route::get('/configuracion/mantenimiento/consultar-fecha-proxima/{id_instalacion}/{fecha}','MantenimientoController@getFechaProxima');
+    });
+    
 });
 

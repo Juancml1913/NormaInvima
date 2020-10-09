@@ -58,21 +58,25 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
                         Indicadores
                     </a>
-                    <a class="nav-link" href="/usuarios">
-                        <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                        Usuarios
-                    </a>
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConfiguracion"
-                        aria-expanded="false" aria-controls="collapseConfiguracion">
-                        <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
-                        Configuración
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseConfiguracion" aria-labelledby="headingOne"
-                        data-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="/configuracion/mantenimiento">Mantenimiento</a>
-                    </div>
+                    {{--Opciones de administrador--}}
+                    @if (Auth::user()->rol==1)
+                        <a class="nav-link" href="/usuarios">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Usuarios
+                        </a>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConfiguracion"
+                            aria-expanded="false" aria-controls="collapseConfiguracion">
+                            <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
+                            Configuración
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseConfiguracion" aria-labelledby="headingOne"
+                            data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="/configuracion/mantenimiento">Mantenimiento</a>
+                        </div>
+                    @endif
+                    
 
                 </div>
             </div>
