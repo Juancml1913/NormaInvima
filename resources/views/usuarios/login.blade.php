@@ -22,15 +22,9 @@
                                         <input class="form-control py-4" id="password" name="password" type="password" placeholder="Ingrese contraseña" />
                                         <div class="text-danger" name="password"><small><ul></ul></small></div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
-                                            <label class="custom-control-label" for="rememberPasswordCheck">Recordar contraseña</label>
-                                        </div>
-                                    </div>
                                     <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" href="password.html">¿Olvide mi contraseña?</a>
-                                        <button class="btn btn-primary">Ingresar</button>
+                                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#resetPassword">¿Olvide mi contraseña?</button>
+                                        <button type="submit" class="btn btn-primary">Ingresar</button>
                                     </div>
                                 </form>
                             </div>
@@ -54,6 +48,37 @@
             </div>
         </footer>
     </div>
+</div>
+
+<!-- Modal olvide contraseña -->
+<div class="modal fade" id="resetPassword" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <form id="formRecuperar">
+            <div class="modal-body">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label for="email_recuperacion" class="col-form-label">Email de recuperación</label>
+                            <input class="form-control" type="text" id="email_recuperacion" name="email_recuperacion" placeholder="Ingrese email de recuperación">
+                            <div class="text-danger" name="email_recuperacion"><small><ul></ul></small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="enviarEmail" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
 </div>
 @endsection
 

@@ -22,14 +22,14 @@ $(document).ready(() => {
         event.preventDefault();
 
         $.ajax({
-            url: "/",
-            type: 'POST',
-            dataType: 'json',
-            data: form.serialize(),
-            //beforeSend: () => {
-            //    fade.fade_loading_open();
-            //}
-        })
+                url: "/",
+                type: 'POST',
+                dataType: 'json',
+                data: form.serialize(),
+                //beforeSend: () => {
+                //    fade.fade_loading_open();
+                //}
+            })
             .done(function (data) {
                 if (data.validate == true) {
                     if (data.auth) {
@@ -47,6 +47,46 @@ $(document).ready(() => {
             })
             .fail(function (data) {
                 toastr.error('No se pudo iniciar sesión')
+            });
+
+    });
+
+    let formRecuperar = $('#formRecuperar');
+
+    function clearMessageRecuperar() {
+        $('div[name=email_recuperacion] small ul').empty();
+    }
+
+    formRecuperar.on('submit', (event) => {
+        event.preventDefault();
+
+        $.ajax({
+                url: "/password/email",
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'json',
+                data: {'email':$('#email_recuperacion').val()}
+            })
+            .done(function (data) {
+                if (data.validate == true) {
+                    if(data.result == true){
+                        formRecuperar[0].reset();
+                        clearMessageRecuperar();
+                        toastr.success(data.message)                    
+                        $('#resetPassword').modal('hide');
+                    }else{
+                        clearMessageRecuperar();
+                        toastr.error(data.message)  
+                    }                    
+                } else {
+                    clearMessageRecuperar();
+                    validateFalse(data.errors);
+                }
+            })
+            .fail(function (data) {
+                toastr.error('No se pudo enviar el correo.')
             });
 
     });

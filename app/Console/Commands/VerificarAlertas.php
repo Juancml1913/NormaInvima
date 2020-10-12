@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\User;
 use App\Mantenimiento;
 use App\Notifications\Alerta;
+use Illuminate\Support\Carbon;
 
 class VerificarAlertas extends Command
 {
@@ -40,9 +41,18 @@ class VerificarAlertas extends Command
      */
     public function handle()
     {
+        
         $users=User::where('estado',1)->get();
-        foreach ($users as $user) {
-            $user->notify(new Alerta("Alerta: mantenimiento preventivo", "Probando las alertas"));
+        $carbon = new Carbon();
+        $mantenimientos=Mantenimiento::select('instalaciones_fisicas.descripcion',
+        'mantenimientos.tipo')
+        ->join('instalaciones_fisicas', 'instalaciones_fisicas.id', 'mantenimientos.id_instalacion')
+        ->where([['mantenimientos.tipo',1],['mantenimientos.fecha_proxima',$carbon->toDateString()]])->get();
+        foreach ($mantenimientos as $mantenimiento) {
+            foreach ($users as $user) {
+                $user->notify(new Alerta("Alerta: mantenimiento preventivo", "Mantenimiento programado para la instalación: ".$mantenimiento->descripcion));
+            }            
         }
+        //User::find(3)->first()->notify(new Alerta("Alerta: mantenimiento preventivo", "Mantenimiento programado para la instalación: ".$mantenimiento->descripcion));    
     }
 }
