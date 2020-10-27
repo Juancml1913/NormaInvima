@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'name' => 'Norma invima',
+    'name' => 'Compliance Sanitary Standar-Soft',
     'manifest' => [
-        'name' => env('APP_NAME', 'Norma invima'),
-        'short_name' => 'Norma invima',
+        'name' => 'Compliance Sanitary Standar-Soft',
+        'short_name' => 'Compliance Sanitary',
         'start_url' => '/',
         'background_color' => '#ffffff',
-        'theme_color' => '#000000',
+        'theme_color' => '#012349',
         'display' => 'standalone',
         'orientation'=> 'any',
         'status_bar'=> 'black',
@@ -57,7 +57,7 @@ return [
             '1668x2388' => '/images/icons/splash-1668x2388.png',
             '2048x2732' => '/images/icons/splash-2048x2732.png',
         ],
-        'shortcuts' => [
+        /*'shortcuts' => [
             [
                 'name' => 'Shortcut Link 1',
                 'description' => 'Shortcut Link 1 Description',
@@ -72,7 +72,7 @@ return [
                 'description' => 'Shortcut Link 2 Description',
                 'url' => '/shortcutlink2'
             ]
-        ],
+        ],*/
         'custom' => []
     ]
 ];

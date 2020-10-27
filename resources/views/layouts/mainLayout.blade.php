@@ -8,7 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Norma invima</title>
+    <title>Compliance Sanitary Standar-Soft</title>
     <link rel="stylesheet"
         href="{{ asset('assets/bootstrap-4.5.2-dist/css/bootstrap.min.css') }}">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />

@@ -1,7 +1,7 @@
 @extends('layouts.mainLayout')
 
 @section('contenido')
-<div id="layoutAuthentication" style="background-color: #212529;">
+<div id="layoutAuthentication" style="background-color: rgba(1, 35, 73, 1);">
     <div id="layoutAuthentication_content">
         <main>
             <div class="container">
@@ -38,12 +38,7 @@
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Your Website 2020</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
+                    <div class="text-muted">Copyright &copy; Compliance Sanitary Standar-Soft 2020</div>
                 </div>
             </div>
         </footer>

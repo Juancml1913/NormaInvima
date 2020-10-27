@@ -57,7 +57,8 @@ self.addEventListener('push', function(event) {
       self.registration.showNotification(data.title,{
         body: data.body,
         icon: data.icon,
-        requireInteraction:true
+        requireInteraction:true,
+        badge: data.badge
       });
       console.log('This push event has data: ', event.data.text());
     } else {

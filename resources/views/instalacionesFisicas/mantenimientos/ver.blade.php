@@ -10,7 +10,7 @@
     </ol>
     <div class="row">
         @if ($mantenimiento['documento']=="")
-            <iframe style="background-color: #212529;width: 45%; height:500px;" src="{{ asset('images/error404.gif') }}" frameborder="0"></iframe>
+            <iframe style="background-color: rgba(1, 35, 73, 1);width: 45%; height:500px;" src="{{ asset('images/error404.gif') }}" frameborder="0"></iframe>
         @else
             <iframe style="width: 100%;height:500px;border:3px solid black;"
             src="{{ asset('storage/'.$mantenimiento['documento']) }}"

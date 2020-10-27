@@ -23,4 +23,12 @@
         </a>
     </div>
 </div>--}}
+<div class="col-md-12">
+    <div class="col-md-6 offset-md-3">
+        <h3>Compliance Sanitary Standar-Soft</h3>
+    </div>
+    <div class="col-md-6 offset-md-3">
+        <img class="img-fluid" style="max-width: 100%; height: auto;" src="{{asset('images/icons/icon-512x512.png')}}" />
+    </div>
+</div>
 @endsection

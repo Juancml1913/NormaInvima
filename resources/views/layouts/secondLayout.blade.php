@@ -14,7 +14,7 @@
 
 @section('contenido')
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="/inicio">Norma invima</a>
+    <a class="navbar-brand" href="/inicio">Complianc Sanitary</a>
     <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i
             class="fas fa-bars"></i></button>
     <ul class="navbar-nav ml-auto ml-md-8">
@@ -158,12 +158,7 @@
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Your Website 2020</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
+                    <div class="text-muted">Copyright &copy; Compliance Sanitary Standar-Soft 2020</div>
                 </div>
             </div>
         </footer>

@@ -7,7 +7,7 @@ $(document).ready(()=>{
             { "data": "nombre" },
             { "data": "email" },
             {"data":"rol",render:(rol)=>{
-                return rol=='1'?'Administrador':'Operador'
+                return rol=='1'?'Administrador':'Operario'
             }},
             {"data":"estado",render:(estado)=>{
                 return estado=='1'?'<span class="badge badge-success">Activado</span>':'<span class="badge badge-danger">Desactivado</span>'

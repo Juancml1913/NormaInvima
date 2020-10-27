@@ -41,6 +41,7 @@ class Alerta extends Notification
       return (new WebPushMessage)
             ->title($this->title)
             ->icon('images/alerta.png')
+            ->badge('images/icons/icon-96x96.png')
             ->body($this->body);            
     }
 
